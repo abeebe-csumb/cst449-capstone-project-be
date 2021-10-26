@@ -11,6 +11,6 @@ app.get('/', (req, res) => {
   }); //test
 
 //listen
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('server started');
 });
