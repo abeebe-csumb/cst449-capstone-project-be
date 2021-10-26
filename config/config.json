@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "foo",
+    "password": "bar",
+    "database": "solaris",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
