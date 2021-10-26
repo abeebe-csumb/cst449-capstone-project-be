@@ -7,17 +7,35 @@ const pool = require("./dbPool.js");
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
+require("dotenv").config();
+const bodyParser = require('body-parser');
+
+//parse incoming requests
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//models
+var models = require("./models");
+
+//sync db
+models.sequelize.sync().then(function() {
+    console.log("database syncronization complete");
+}).catch(function(err) {
+    console.log(err);
+});
+
+//api routes
+require("./routes")(app);
+
 //routes
 app.get('/', async (req, res) => {
-    let rows = await executeSQL('select 1;', []);
-    //res.send(rows);
-    res.render('index');
+    res.render('index')
 }); //index
 
 app.get('/db', async (req, res) => {
     let rows = await executeSQL('select 1;', []);
     res.send(rows);
-}); //database
+}); //database test
 
 //functions
 async function executeSQL(sql, params) {
