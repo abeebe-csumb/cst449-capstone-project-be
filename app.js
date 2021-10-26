@@ -10,8 +10,14 @@ app.use(express.static("public"));
 //routes
 app.get('/', async (req, res) => {
     let rows = await executeSQL('select 1;', []);
+    //res.send(rows);
+    res.render('index');
+}); //index
+
+app.get('/db', async (req, res) => {
+    let rows = await executeSQL('select 1;', []);
     res.send(rows);
-}); //test
+}); //database
 
 //functions
 async function executeSQL(sql, params) {
